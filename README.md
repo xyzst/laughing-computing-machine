@@ -12,7 +12,7 @@ Multiple engines
 Excecution Contexts and Execution Stack
 Execution Context
 All JS code needs to run in environment of execution context
-\*\*\*By default, all code not inside any function is executed in a GLOBAL context
+**_By default, all code not inside any function is executed in a GLOBAL context
 eg, "window" object in the browser
 A function call will introduce a new execution context to the stack
 Execution Context (Detail)
@@ -25,9 +25,16 @@ How created?
 creation phase
 creation of variable object
 argument object created containing all args passed into fx
-code scanned for fx declarations, for each fx a property is created in the VO pointing to the fx
-code scanned for variable declarations, for each variable a property is created in the VO and set to undefined
+code scanned for fx declarations, for each fx a property is created in the VO pointing to the fx (HOISTING)
+code scanned for variable declarations, for each variable a property is created in the VO and set to undefined (HOISTING)
 creation of scope chain
 determine value of "this" variable
 execution phase
 code of function that generated current execution context ran line by line
+Execution stack
+order in which functions are called
+Scoping in JS
+Scoping answers the question "where can we ccess a certain variable?"
+Each new fx creates a scope: space/env in which variables it defines are accessible
+Lexical scoping: a function that is lexically within another function gets access to the scope of the outer function (parent function)
+_**ORDER WIN WHICH FUNCTIONS ARE WRITTEN LEXICALLY\*\*\*
