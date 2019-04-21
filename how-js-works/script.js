@@ -31,22 +31,59 @@
  * Scoping
  */
 
-var a = "hello";
-first();
+// var a = "hello";
+// first();
 
-function first() {
-  var b = "ni hao"; // has access to global scope at this point since line 35 execs fx (lexical scoping)
-  second();
+// function first() {
+//   var b = "ni hao"; // has access to global scope at this point since line 35 execs fx (lexical scoping)
+//   second();
 
-  function second() {
-    var c = "heya"; // has access to global, and first() func scopes
-    // console.log(a + b + c);
-    third(); // can access due to scoping!
+//   function second() {
+//     var c = "heya"; // has access to global, and first() func scopes
+//     // console.log(a + b + c);
+//     third(); // can access due to scoping!
+//   }
+// }
+
+// function third() {
+//   var d = "john";
+//   //   console.log(c); // Reference Error -- c is not defined (DIFFERENT EXEC STACK!)
+//   console.log(a, d); // access to global scope and function scope
+// }
+
+/**
+ * "this" keyword
+ */
+
+// console.log(this); // prints window context
+// calcAge(1985);
+// function calcAge(year) {
+//   console.log(2018 - year);
+//   console.log(this); // still prints global window context/object
+// }
+
+var john = {
+  name: "john",
+  yearOfBirth: 1990,
+  calculateAge: function() {
+    console.log(this);
+    console.log(2018 - this.yearOfBirth);
+    /*
+    function inner() {
+      console.log(this); // points to global window context/object.
+    }
+    inner(); // Still a regular function call and not a someObject.innerFunction()
+    */
   }
-}
+};
 
-function third() {
-  var d = "john";
-  //   console.log(c); // Reference Error -- c is not defined (DIFFERENT EXEC STACK!)
-  console.log(a, d); // access to global scope and function scope
-}
+john.calculateAge(); // prints the john object
+
+var michael = {
+  name: "Michael",
+  yearOfBirth: 1984
+};
+
+// "method borrowing"
+michael.calculateAge = john.calculateAge; // does not include (), so it's just the fx object
+michael.calculateAge(); // this keyword is now assigned to the michael object, and not the john object
